@@ -1,13 +1,25 @@
 # Secure Banking Transactions using Digital Signatures
-**7th-Semester B.Tech Applied Cryptography & Network Security Lab Project**
+**Applied Cryptography — 7th Semester B.Tech Project**
 
 A full-stack, local prototype demonstrating **Public-Key Cryptography (RSA-2048)**, **Cryptographic Hashing (SHA-256)**, **PKCS#1 v1.5 Digital Signatures**, and **Man-in-the-Middle (MITM) Tamper Detection** for secure banking fund transfers.
 
 ---
 
-## 1. Project Overview & Architecture
+## 👥 Project Team Members
 
-When a customer initiates a fund transfer, the transaction must satisfy three fundamental information security pillars:
+| S.No | Name | Roll Number | Role |
+| :---: | :--- | :---: | :--- |
+| 1 | **Chaitanya** | `2306044` | Cryptographic Stepper & MITM Playground |
+| 2 | **Rohith** | `2306045` | Database & Nonce Replay Mitigation |
+| 3 | **Siddharth** | `2306046` | PKI Key Generation & Verification Engine |
+| 4 | **Aditya** | `2306047` | UI / UX & Forensic Audit Ledger |
+| 5 | **Saim** | `2306049` | Core Signing Pipeline & Integration |
+
+---
+
+## 🏛️ Project Overview & Architecture
+
+When a customer initiates an electronic fund transfer, the transaction must satisfy three fundamental information security pillars:
 1. **Authentication:** Proving the request genuinely originates from the legitimate account holder.
 2. **Integrity:** Ensuring in-transit data (recipient, amount, timestamp) cannot be modified without immediate detection.
 3. **Non-Repudiation:** The sender cannot claim they never authorized the transfer.
@@ -26,40 +38,43 @@ When a customer initiates a fund transfer, the transaction must satisfy three fu
                    { wirePayload, signature }
                             │
                (Optional MITM Attack Injected)
-               - Alter Amount: 1,000 -> 15,000
-               - Divert Beneficiary: HACK999999
+               - Alter Amount: ₹2,500 -> ₹30,000
+               - Divert Beneficiary: HACK999999999
                - Corrupt Signature Bytes
 ```
 
 ---
 
-## 2. Interactive Cryptographic Stepper (UI Walkthrough)
+## 🔬 Interactive Cryptographic Stepper (UI Walkthrough)
 
 During lab evaluation, the professor can click **"Launch Cryptographic Stepper & Transit"** to observe data transformation across 5 distinct steps:
 
 1. **Step 1: Canonical Serialization:** Displays the raw parameters and lexicographically sorted JSON string so both sender and bank process identical byte streams.
 2. **Step 2: SHA-256 Digest:** Demonstrates message compression from arbitrary length down to a fixed 256-bit (64 hex character) digest ($H_1$).
 3. **Step 3: RSA-2048 Signing:** Applies the sender's private key using the PKCS#1 v1.5 padding standard ($S = H_1^d \pmod n$) to generate the 2048-bit base64 signature.
-4. **Step 4: Wire Transit & MITM Playground:** Gives interactive buttons to simulate Man-in-the-Middle attacks (Amount Tampering, Receiver Diversion, Signature Bit-flipping).
-5. **Step 5: Bank Verification & Ledger Settlement:** Displays the side-by-side hash comparison ($H_{\text{client}}$ vs $H_{\text{server}}$), public-key verification result, and atomic balance debit/credit.
+4. **Step 4: Wire Transit & MITM Playground:** Provides interactive attack simulation buttons:
+   - **Amount Tampering:** Alters amount in transit (e.g., ₹2,500 $\to$ ₹30,000).
+   - **Receiver Spoofing:** Diverts funds to an attacker's account (`HACK999999999`).
+   - **Signature Bit-Flipping:** Corrupts raw signature bytes.
+5. **Step 5: Bank Verification & Ledger Settlement:** Displays side-by-side hash comparison ($H_{\text{client}}$ vs $H_{\text{server}}$), public-key verification verdict, and atomic balance debit/credit.
 
 ---
 
-## 3. Tech Stack
+## 💻 Tech Stack
 
-- **Frontend:** React 18, Vite, Tailwind CSS, Lucide Icons, Canvas Confetti.
+- **Frontend:** React 18, Vite, Tailwind CSS, Lucide Icons, Canvas Confetti (Light Theme).
 - **Backend:** Node.js, Express.
 - **Cryptography Engine:** Node.js native `node:crypto` (RSA-2048 keygen, SHA-256 digest, PKCS#1 v1.5 signing & verification).
 - **Database:** SQLite (`better-sqlite3`) storing bank accounts, public keys, transaction audit logs, and processed nonces.
 
 ---
 
-## 4. How to Run Locally
+## 🚀 How to Run Locally
 
 ### Quick Start (Single Command):
-From the project folder:
+From the `SecureBanking` folder:
 ```powershell
-cd SecureBankingDigitalSignatures
+cd SecureBanking
 npm run start
 ```
 Then open your browser at **[http://localhost:5000](http://localhost:5000)**.
@@ -73,12 +88,25 @@ If you want to edit React code with Vite hot-reloading:
 
 ---
 
-## 5. Seed Demonstration Accounts
+## 🏦 Seed Demonstration Accounts
 
-The system automatically initializes with pre-configured accounts and freshly generated RSA-2048 key pairs:
-- **Alice Sharma** (`SBIN004829101`) — Balance: ₹75,000.00
-- **Bob Verma** (`HDFC009382102`) — Balance: ₹32,000.00
-- **Charlie Patel** (`ICIC001920103`) — Balance: ₹18,500.00
+The system automatically initializes with 5 pre-configured accounts and freshly generated RSA-2048 key pairs:
 
-*Click **"View Keys"** on any account card to inspect or copy their PEM-formatted Public Key and Private Key.*
+| Account Holder | Account Number | Bank | Initial Balance | Key Type |
+| :--- | :--- | :--- | :---: | :---: |
+| **Siddharth** | `SBIN004829101` | SBI | ₹85,000.00 | RSA-2048 / SHA-256 |
+| **Chaitanya** | `HDFC009382102` | HDFC | ₹62,000.00 | RSA-2048 / SHA-256 |
+| **Rohith** | `ICIC001920103` | ICICI | ₹45,000.00 | RSA-2048 / SHA-256 |
+| **Saim** | `AXIS007182104` | Axis | ₹95,000.00 | RSA-2048 / SHA-256 |
+| **Aditya** | `PNB0003819105` | PNB | ₹54,000.00 | RSA-2048 / SHA-256 |
 
+*Click **"Keys"** on any account card in the UI to inspect or copy their PEM-formatted Public Key and Private Key.*
+
+---
+
+## 📑 Academic Report Documentation
+
+The formal academic project report is available in the `report/` directory:
+- **PDF Report:** [`report/Secure_Banking_Digital_Signatures_Report.pdf`](report/Secure_Banking_Digital_Signatures_Report.pdf) (Compiled with LaTeX)
+- **LaTeX Source:** [`report/Secure_Banking_Digital_Signatures_Report.tex`](report/Secure_Banking_Digital_Signatures_Report.tex)
+- **Markdown Version:** [`report/Secure_Banking_Digital_Signatures_Report.md`](report/Secure_Banking_Digital_Signatures_Report.md)
