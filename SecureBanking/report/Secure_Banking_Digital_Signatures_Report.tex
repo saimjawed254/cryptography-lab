@@ -46,54 +46,57 @@
 \begin{document}
 
 % ==============================================================================
-% TITLE PAGE (Matching Photo 1)
+% TITLE PAGE (Matching Photo 1 Perfectly)
 % ==============================================================================
 \begin{titlepage}
     \thispagestyle{empty}
     \centering
-    \vspace*{0.3cm}
+    \vspace*{0.2cm}
     
-    % Official Circular Emblem of NIT Patna
-    \includegraphics[width=2.8cm]{nitp_logo.png}
+    % Official Circular Emblem of NIT Patna (Prominent and Crisp)
+    \includegraphics[width=4.6cm]{nitp_logo.png}
     
     \vspace{0.45cm}
-    {\large \textbf{National Institute of Technology Patna}}\\[0.25cm]
-    {\normalsize Course : Applied Cryptography}
+    {\LARGE \textbf{National Institute of Technology Patna}}\\[0.25cm]
+    {\Large Course : Applied Cryptography (CS74135)}
     
     \vspace{1.1cm}
-    {\LARGE \textbf{Secure Banking Transactions: Protecting}}\\[0.2cm]
-    {\LARGE \textbf{Financial Integrity}}\par
+    {\fontsize{21}{26}\selectfont \textbf{Secure Banking Transactions: Protecting}}\\[0.25cm]
+    {\fontsize{21}{26}\selectfont \textbf{Financial Integrity}}\par
     
-    \vspace{0.65cm}
-    {\normalsize Design and implementation of a simulated banking system to filter and secure financial transactions using digital signatures based on public-key cryptography\par}
+    \vspace{0.9cm}
+    \begin{minipage}{0.92\textwidth}
+    \centering
+    \large Design and implementation of a simulated banking system to filter and secure financial transactions using digital signatures based on predefined asymmetric protocols
+    \end{minipage}
     
-    \vspace{1.2cm}
-    \renewcommand{\arraystretch}{1.25}
-    \begin{tabular}{|p{5.5cm}|p{3.5cm}|}
+    \vspace{1.3cm}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|p{9.8cm}|p{3.8cm}|}
     \hline
-    \textbf{Name} & \textbf{Roll No.} \\
+    \textbf{\Large Name} & \textbf{\Large Roll No.} \\
     \hline
-    Chaitanya & 2306044 \\
+    {\large Kancharla Manikya Naga Chaitanya} & {\large 2306044} \\
     \hline
-    Rohith & 2306045 \\
+    {\large Chennupalli Rohitth} & {\large 2306045} \\
     \hline
-    Siddharth & 2306046 \\
+    {\large Siddharth Singh} & {\large 2306046} \\
     \hline
-    Aditya & 2306047 \\
+    {\large Aditya Kumar} & {\large 2306047} \\
     \hline
-    Saim & 2306049 \\
+    {\large Saim Jawed} & {\large 2306049} \\
     \hline
     \end{tabular}
     
-    \vfill
+    \vspace{3.4cm}
     
-    {\normalsize Department of Computer Science and Engineering}\\[0.12cm]
-    {\normalsize National Institute of Technology Patna}\\[0.25cm]
-    {\normalsize November 2026}
+    {\large Department of Computer Science and Engineering}\\[0.2cm]
+    {\large National Institute of Technology Patna}\\[0.3cm]
+    {\large November 2026}
 \end{titlepage}
 
 % ==============================================================================
-% TABLE OF CONTENTS (Matching Photo 2)
+% TABLE OF CONTENTS (Matching Photo 2 Perfectly)
 % ==============================================================================
 \pagenumbering{arabic}
 \tableofcontents
@@ -104,17 +107,17 @@
 % ==============================================================================
 \section{Introduction}
 
-\subsection{1.1 Motivation and Significance}
+\subsection{Motivation and Significance}
 In modern digital finance, electronic funds transfer (EFT) forms the foundation of commercial banking systems. Conducting high-volume financial transactions over public, unauthenticated network channels introduces critical security challenges, including man-in-the-middle alterations, beneficiary diversion, unauthorized debiting, and transaction repudiation. 
 
 Symmetric cryptographic systems require shared secrets between all parties, which poses serious key-distribution bottlenecks and inherently fails to provide non-repudiation. Digital signatures based on public-key cryptography and one-way cryptographic hash functions resolve this vulnerability. By binding each transaction payload to a mathematically unforgeable signature created exclusively with the account holder's private key, the banking server can rigorously authenticate transaction originators, preserve data integrity, and guarantee dispute-free settlement.
 
-\subsection{1.2 Report Structure}
+\subsection{Report Structure}
 This report details the architectural design, cryptographic formulation, practical deployment, and adversarial evaluation of the simulated banking platform:
 \begin{itemize}
     \item \textbf{Section 2 (Theoretical Background):} Details the mathematical foundation of RSA asymmetric key pairs, SHA-256 message hashing, and PKCS\#1 v1.5 signature standards.
-    \item \textbf{Section 3 (System Architecture and Design):} Presents the client-server interaction model, the interactive 5-step cryptographic stepper, and transaction verification workflows.
-    \item \textbf{Section 4 (Implementation Details):} Specifies the deterministic canonical serialization, signing algorithms, and replay attack defenses.
+    \item \textbf{Section 3 (System Architecture and Design):} Presents the client-server interaction model, the interactive rule engine, and transaction verification workflows.
+    \item \textbf{Section 4 (Implementation Details):} Specifies the deterministic canonical serialization, signing algorithms, code logic, and replay attack defenses.
     \item \textbf{Section 5 (How to Run the Banking Project):} Outlines environment prerequisites, initialization instructions, and local deployment steps.
     \item \textbf{Section 6 (Testing and Evaluation):} Documents empirical test results under legitimate and intercepted adversarial tampering conditions.
     \item \textbf{Section 7 \& 8 (Limitations, Enhancements, Conclusion):} Synthesizes project findings, architectural constraints, and future scalability directions.
@@ -125,7 +128,7 @@ This report details the architectural design, cryptographic formulation, practic
 % ==============================================================================
 \section{Theoretical Background}
 
-\subsection{2.1 Digital Signature Schemes}
+\subsection{Digital Signature Schemes}
 A digital signature is a cryptographic mechanism providing non-repudiation, message integrity, and origin authenticity. Unlike asymmetric encryption, which uses the recipient's public key for confidentiality, digital signatures utilize the sender's private key for authentication:
 \begin{itemize}
     \item \textbf{Signing:} $S = H(M)^d \pmod n$ (Sender signs the digest using their confidential private key $d$).
@@ -133,7 +136,7 @@ A digital signature is a cryptographic mechanism providing non-repudiation, mess
 \end{itemize}
 If $H' == H(M)$, the transaction is proven authentic and unmodified.
 
-\subsection{2.2 Core Concepts}
+\subsection{Core Concepts}
 The security of the banking architecture rests on three mathematical cornerstones:
 \begin{enumerate}
     \item \textbf{RSA Public-Key Cryptosystem (2048-bit):} Built upon the integer factorization problem. Primes $p$ and $q$ yield modulus $n = p \times q$ and totient $\phi(n) = (p - 1)(q - 1)$. With public exponent $e = 65537$, the private exponent $d$ is derived via the Extended Euclidean Algorithm ($d \cdot e \equiv 1 \pmod{\phi(n)}$).
@@ -150,12 +153,19 @@ The security of the banking architecture rests on three mathematical cornerstone
 % ==============================================================================
 \section{System Architecture and Design}
 
-\subsection{3.1 Cryptographic Stepper Engine}
-The application provides an interactive, visual stepper that exposes all underlying cryptographic state transformations before submitting payloads across the network. The system registers five seed customer accounts stored in a persistent SQLite database:
+\subsection{Rule Engine}
+The banking application enforces cryptographic transaction verification rules through an automated rule engine. The engine requires that every wire request satisfy three conditions before financial settlement:
+\begin{enumerate}
+    \item \textbf{Signature Legitimacy Rule:} The decrypted signature must match the SHA-256 hash of the canonical payload using the sender's public key.
+    \item \textbf{Nonce Freshness Rule:} The request nonce $\eta$ must be unique within a sliding time window to prevent transaction replay.
+    \item \textbf{Solvency Rule:} The sender's ledger account must possess sufficient settled funds ($\text{bal}_{\text{sender}} \ge \text{amount}$).
+\end{enumerate}
+
+The system registers five seed customer accounts stored in a persistent SQLite database:
 \begin{table}[h]
 \centering
 \small
-\begin{tabularx}{\textwidth}{l p{2.8cm} l l r}
+\begin{tabularx}{\textwidth}{l p{3.2cm} l l r}
 \toprule
 \textbf{Customer Name} & \textbf{Account Number} & \textbf{Bank Code} & \textbf{Initial Balance} & \textbf{Key Type} \\
 \midrule
@@ -169,7 +179,7 @@ Saim & \texttt{AXIS007182104} & AXIS & \INR 95,000.00 & RSA-2048 / SHA-256 \\
 \caption{Pre-configured Customer Accounts in Banking Ledger}
 \end{table}
 
-\subsection{3.2 Transaction Verification Flowchart}
+\subsection{Transaction Verification Flowchart}
 The end-to-end verification protocol progresses across five deterministic stages:
 \begin{figure}[h]
 \centering
@@ -196,10 +206,10 @@ The end-to-end verification protocol progresses across five deterministic stages
 % ==============================================================================
 \section{Implementation Details}
 
-\subsection{4.1 Verification \& Security Logic}
-The system enforces client-side transaction signing and server-side verification using standard mathematical specifications:
+\subsection{Code Explanation}
+The system enforces client-side transaction signing and server-side verification using standard algorithmic procedures without relying on insecure ad-hoc encoding:
 
-\begin{tcolorbox}[colback=codebg,colframe=codeborder,title=\textbf{Algorithm 1: Client-Side Transaction Signing}]
+\begin{tcolorbox}[colback=codebg,colframe=codeborder,title=\textbf{Algorithm 1: Client-Side Transaction Signing Procedure}]
 \textbf{Input:} Transaction Payload $\mathcal{P} = \{\text{sender}, \text{receiver}, \text{amount}, \text{timestamp}, \text{nonce}\}$, Private Key $K_{\text{priv}} = (d, n)$\\
 \textbf{Output:} Base64-encoded Digital Signature $S$
 \begin{enumerate}
@@ -220,7 +230,7 @@ The system enforces client-side transaction signing and server-side verification
 \end{enumerate}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=codebg,colframe=codeborder,title=\textbf{Algorithm 2: Bank-Side Signature Verification}]
+\begin{tcolorbox}[colback=codebg,colframe=codeborder,title=\textbf{Algorithm 2: Bank-Side Signature Verification Procedure}]
 \textbf{Input:} Wire Payload $\mathcal{P}_{\text{wire}}$, Signature $S$, Sender Public Key $K_{\text{pub}} = (e, n)$\\
 \textbf{Output:} Decision $\in \{\textbf{True}, \textbf{False}\}$
 \begin{enumerate}
@@ -240,9 +250,9 @@ The system enforces client-side transaction signing and server-side verification
 \end{enumerate}
 \end{tcolorbox}
 
-\subsubsection{4.1.1 Key Points \& Security Guarantees}
+\subsubsection{Key Points}
 \begin{itemize}
-    \item \textbf{Deterministic Canonical Encoding:} Prevents whitespace and JSON serialization discrepancies across platforms from corrupting the calculated hash.
+    \item \textbf{Deterministic Canonical Encoding:} Prevents whitespace, key ordering, and serialization discrepancies from altering the message digest.
     \item \textbf{Replay Attack Prevention via Nonce Cache:} Each request embeds a high-entropy nonce $\eta$ and timestamp. The server maintains a processed nonce set $\mathcal{N}_{\text{processed}}$. If $\eta \in \mathcal{N}_{\text{processed}}$, the transaction is rejected as an unauthorized replay attempt.
     \item \textbf{Atomic Database Transactions:} Balance transfers debit the sender and credit the receiver atomically within a single SQLite transaction block.
 \end{itemize}
@@ -252,7 +262,7 @@ The system enforces client-side transaction signing and server-side verification
 % ==============================================================================
 \section{How to Run the Banking Project}
 
-\subsection{5.1 Requirements}
+\subsection{Requirements}
 \begin{itemize}
     \item \textbf{Node.js Environment:} Node.js version 18.0 or higher.
     \item \textbf{Package Manager:} npm (Node Package Manager).
@@ -260,7 +270,7 @@ The system enforces client-side transaction signing and server-side verification
     \item \textbf{Web Browser:} Any modern web browser (Google Chrome, Firefox, Safari, Microsoft Edge).
 \end{itemize}
 
-\subsection{5.2 Steps to Run}
+\subsection{Steps to Run}
 \begin{enumerate}
     \item Open a terminal and navigate to the project directory:
     \begin{verbatim}
@@ -286,22 +296,22 @@ The system enforces client-side transaction signing and server-side verification
 % ==============================================================================
 \section{Testing and Evaluation}
 
-\subsection{6.1 Test Environment}
+\subsection{Test Environment}
 The test suite was executed on a workstation running Node.js v20 with native \texttt{node:crypto} acceleration. Five seed customer accounts were tested across legitimate and adversarially intercepted transactions.
 
-\subsection{6.2 Banking Project Test Results}
+\subsection{Banking Project Test Results}
 
-\subsubsection{6.2.1 Test 1: Legitimate Signed Transaction Verification}
+\subsubsection{Test 1: Valid Authenticated Transaction}
 \begin{itemize}
-    \item \textbf{Sender:} Siddharth (\texttt{SBIN004829101})
-    \item \textbf{Beneficiary:} Saim (\texttt{AXIS007182104})
+    \item \textbf{Sender:} Siddharth Singh (\texttt{SBIN004829101})
+    \item \textbf{Beneficiary:} Saim Jawed (\texttt{AXIS007182104})
     \item \textbf{Transfer Amount:} \INR 5,000.00
     \item \textbf{Client Hash ($H_1$):} \texttt{a9f81d4b6807f43c... (64 hex characters)}
     \item \textbf{Verification Status:} $H_1 == H_2 \implies$ \textbf{MATCH}.
     \item \textbf{Result:} Status \textbf{200 OK}, transaction settled, balances updated successfully.
 \end{itemize}
 
-\subsubsection{6.2.2 Test 2: Man-in-the-Middle Tamper Detection}
+\subsubsection{Test 2: Tampered Payload Detection}
 \begin{itemize}
     \item \textbf{Attack Action:} Adversary intercepts the transfer in flight and alters the amount from \INR 2,500.00 to \INR 30,000.00.
     \item \textbf{Bank Recomputed Hash ($H_2$):} \texttt{f024be51aa76391d...}
@@ -309,7 +319,7 @@ The test suite was executed on a workstation running Node.js v20 with native \te
     \item \textbf{Result:} Bank rejects transaction with error \texttt{ERR\_SIGNATURE\_MISMATCH}. Account balances remain unchanged with zero financial loss.
 \end{itemize}
 
-\subsection{6.3 Performance Observations}
+\subsection{Performance Observations}
 Benchmark measurements demonstrate that client-side SHA-256 hashing and RSA-2048 signing complete in under $4.2\text{ ms}$, while server-side public-key verification requires approximately $1.1\text{ ms}$. This latency profile supports near real-time financial settlement while enforcing rigorous cryptographic security guarantees.
 
 % ==============================================================================
@@ -317,13 +327,13 @@ Benchmark measurements demonstrate that client-side SHA-256 hashing and RSA-2048
 % ==============================================================================
 \section{Limitations and Future Enhancements}
 
-\subsection{7.1 Limitations}
+\subsection{Limitations}
 \begin{itemize}
     \item \textbf{Certificate Authority (CA) Hierarchy:} The prototype stores public keys directly in the bank's database; production banking systems require X.509 certificate chains with revocation lists (CRLs).
     \item \textbf{Key Storage Boundary:} Private keys are simulated in client memory; real-world deployments mandate hardware security modules (HSMs) or Secure Enclaves (WebAuthn / FIDO2).
 \end{itemize}
 
-\subsection{7.2 Suggested Improvements}
+\subsection{Suggested Improvements}
 \begin{itemize}
     \item Transitioning from RSA-2048 to Elliptic Curve Digital Signatures (ECDSA secp256k1 or Ed25519) to reduce signature byte sizes and boost throughput.
     \item Integrating a decentralized distributed ledger (blockchain) for tamper-evident multi-party audit trails across interbank settlements.
@@ -335,9 +345,6 @@ Benchmark measurements demonstrate that client-side SHA-256 hashing and RSA-2048
 \section{Conclusion}
 The project \textbf{``Secure Banking Transactions: Protecting Financial Integrity''} successfully implements a functional and visual banking application governed by public-key cryptography. Through the combined application of RSA-2048 asymmetric keys, SHA-256 hashing, PKCS\#1 v1.5 padding, and replay-preventing nonces, the platform delivers mathematically provable transaction integrity, origin authenticity, and non-repudiation. The integrated man-in-the-middle simulator conclusively validates that any unauthorized modification in flight is detected and blocked by the banking server before fund commitment.
 
-% ==============================================================================
-% REFERENCES
-% ==============================================================================
 \begin{thebibliography}{99}
 \bibitem{rsa} R. L. Rivest, A. Shamir, and L. Adleman, ``A Method for Obtaining Digital Signatures and Public-Key Cryptosystems,'' \textit{Communications of the ACM}, vol. 21, no. 2, pp. 120--126, 1978.
 \bibitem{fips180} National Institute of Standards and Technology (NIST), ``Secure Hash Standard (SHS),'' \textit{FIPS PUB 180-4}, 2015.
