@@ -207,7 +207,7 @@ The end-to-end verification protocol progresses across five deterministic stages
 \section{Implementation Details}
 
 \subsection{Code Explanation}
-The system enforces client-side transaction signing and server-side verification using standard algorithmic procedures without relying on insecure ad-hoc encoding:
+The banking application is structured as a modular client-server cryptographic architecture hosted in the project repository at \url{https://github.com/saimjawed254/cryptography-lab.git} under the \texttt{SecureBanking/} directory. The system enforces client-side transaction signing and server-side verification using standard algorithmic procedures without relying on insecure ad-hoc encoding:
 
 \begin{tcolorbox}[colback=codebg,colframe=codeborder,title=\textbf{Algorithm 1: Client-Side Transaction Signing Procedure}]
 \textbf{Input:} Transaction Payload $\mathcal{P} = \{\text{sender}, \text{receiver}, \text{amount}, \text{timestamp}, \text{nonce}\}$, Private Key $K_{\text{priv}} = (d, n)$\\
@@ -264,6 +264,7 @@ The system enforces client-side transaction signing and server-side verification
 
 \subsection{Requirements}
 \begin{itemize}
+    \item \textbf{Git Version Control:} Git installed for cloning repository sources.
     \item \textbf{Node.js Environment:} Node.js version 18.0 or higher.
     \item \textbf{Package Manager:} npm (Node Package Manager).
     \item \textbf{Database:} SQLite (automatically initialized and seeded via \texttt{better-sqlite3}).
@@ -272,9 +273,13 @@ The system enforces client-side transaction signing and server-side verification
 
 \subsection{Steps to Run}
 \begin{enumerate}
-    \item Open a terminal and navigate to the project directory:
+    \item Clone the project repository from GitHub:
     \begin{verbatim}
-    cd SecureBanking
+    git clone https://github.com/saimjawed254/cryptography-lab.git
+    \end{verbatim}
+    \item Navigate into the banking project directory:
+    \begin{verbatim}
+    cd cryptography-lab/SecureBanking
     \end{verbatim}
     \item Install dependencies for the server and client:
     \begin{verbatim}
